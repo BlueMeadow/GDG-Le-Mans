@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Edition du tag {{oldTagString}}</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.tag.tagString">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onConfirm()" >Valider</button>
+  <button mat-button (click)="onDelete()" *ngIf="data.tag != null">Supprimer</button>
+  <button mat-button (click)="onCancel()">Annuler</button>
+</div>

@@ -1,0 +1,33 @@
+<div *ngIf="stats">
+
+  <h3> GDG ? </h3>
+  <p>Les Google Developers Groups (GDGs) sont des regroupements de personnes intéressées par les technologies et plateformes de Google: Google Cloud Plateform, Flutter, Android, Tensorflow... partout dans le monde.
+
+    L’objectif du GDG Le Mans est de proposer des conférences et événements au sujet de technologies émergentes ou en pleine expansion, développées ou non par Google.
+
+    Vous pouvez nous retrouver sur Twitter : https://twitter.com/gdglemans</p>
+
+  <div>
+    <h3>Le GDG - Le Mans, c'est aussi</h3>
+    <div class="d-flex flex-wrap text-center">
+      <div class="col-xs-8 col-sm-8 col-md-6 col-lg-4 my-5">
+        <section class="section-feature-plain">
+          <img src="assets/img/placeholder.png" class="img-fluid"  alt="Members-img"/>
+          <p class="text-center">{{stats.membersCount}} membres</p>
+        </section>
+      </div>
+      <div class="col-xs-8 col-sm-8 col-md-6 col-lg-4 my-5">
+        <section class="section-feature-plain">
+          <img src="assets/img/placeholder.png" class="img-fluid"  alt="Events-img"/>
+          <p class="text-center">{{stats.eventCount}} événements</p>
+        </section>
+      </div>
+      <div class="col-xs-8 col-sm-8 col-md-6 col-lg-4 my-5">
+        <section class="section-feature-plain">
+          <img src="assets/img/placeholder.png" class="img-fluid"  alt="avrg-img"/>
+          <p class="text-center">En moyenne {{stats.averageParticipant}} participants<br/>par événements</p>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

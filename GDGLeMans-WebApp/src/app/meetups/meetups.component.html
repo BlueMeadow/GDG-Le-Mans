@@ -1,0 +1,53 @@
+<div *ngIf="upcomingMeetups && pastMeetups">
+
+  <h3>Nos prochaines conférences </h3>
+  <p *ngIf="upcomingMeetups == null || upcomingMeetups.length === 0">Pas d'évènements en approche pour le moment, revenez plus tard ;)</p>
+  <div class="row card-group">
+    <div class="col-4" *ngFor="let uMeetup of upcomingMeetups">
+      <a routerLink="/meetups/{{uMeetup.gdgMeetup.id}}" routerLinkActive="active" class="unlink">
+        <div class="card card-link my-3" style="width: 18rem;">
+          <img *ngIf="uMeetup.event.description_images == null" src="assets/img/gdglemanslogo.png" class="card-img-top" alt="placeholder" />
+          <img *ngIf="uMeetup.event.description_images != null" src="{{uMeetup.event.description_images[0]}}" class="card-img-top" alt="placeholder" />
+          <div class="card-body">
+            <h6 class="card-title">{{uMeetup.event.name}}</h6>
+            <p class="card-subtitle mb-2 text-muted" *ngIf="uMeetup.gdgMeetup.speakerName !== ''">Par {{uMeetup.gdgMeetup.speakerName}}</p>
+            <p class="card-subtitle mb-2 text-muted" *ngIf="uMeetup.gdgMeetup.speakerName === ''">Par le GDG Le Mans</p>
+            <small class="card-text" [innerHTML] = "(uMeetup.event.description.length > 100) ? (uMeetup.event.description | slice:0:100)+'...':(uMeetup.event.description)"></small>
+          </div>
+          <div class="card-footer" *ngIf="uMeetup.tags.length > 0">
+            <mat-chip-list>
+              <mat-chip *ngFor="let tag of uMeetup.tags">
+                {{tag.tagString}}
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <h3>Nos anciens évènements</h3>
+  <div class="row card-group">
+    <div class="col-4" *ngFor="let pMeetup of pastMeetups">
+      <a routerLink="/meetups/{{pMeetup.gdgMeetup.id}}" routerLinkActive="active" class="unlink">
+        <div class="card card-link my-3" style="width: 18rem;" >
+          <img *ngIf="pMeetup.event.description_images == null" src="assets/img/gdglemanslogo.png" class="card-img-top" alt="placeholder" />
+          <img *ngIf="pMeetup.event.description_images != null" src="{{pMeetup.event.description_images[0]}}" class="card-img-top" alt="placeholder" />
+          <div class="card-body">
+            <h6 class="card-title">{{pMeetup.event.name}}</h6>
+            <p class="card-subtitle mb-2 text-muted" *ngIf="pMeetup.gdgMeetup.speakerName !== ''">Par {{pMeetup.gdgMeetup.speakerName}}</p>
+            <p class="card-subtitle mb-2 text-muted" *ngIf="pMeetup.gdgMeetup.speakerName === ''">Par le GDG Le Mans</p>
+            <small class="card-text" [innerHTML] = "(pMeetup.event.description.length > 100) ? (pMeetup.event.description | slice:0:100)+'...':(pMeetup.event.description)"></small>
+          </div>
+          <div class="card-footer" *ngIf="pMeetup.tags.length > 0">
+            <mat-chip-list>
+              <mat-chip *ngFor="let tag of pMeetup.tags">
+                {{tag.tagString}}
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

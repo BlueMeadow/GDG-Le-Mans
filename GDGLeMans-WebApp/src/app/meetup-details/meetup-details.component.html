@@ -1,0 +1,30 @@
+<div class="container" *ngIf="meetup">
+
+  <h1>{{meetup.event.name}}</h1>
+  <div class="w-100 vertical-center pb-2" *ngIf="meetup.gdgMeetup.speakerName != ''">
+    <span class="float-left font-italic mt-2" >Par {{meetup.gdgMeetup.speakerName}}</span>
+    <span class="float-right vertical-center"><a href="https://www.meetup.com/fr-FR/GDG-Le-Mans/events/{{meetup.event.id}}" class="btn btn-light"><i class="fab fa-meetup brand-logo"></i>eetup</a></span>
+  </div>
+  <div class="w-100 vertical-center pb-2" *ngIf="meetup.gdgMeetup.speakerName == ''">
+    <span class="float-left font-italic mt-2" >Par le GDG Le Mans</span>
+    <span class="float-right vertical-center"><a href="https://www.meetup.com/fr-FR/GDG-Le-Mans/events/{{meetup.event.id}}" class="btn btn-light"><i class="fab fa-meetup brand-logo"></i>eetup</a></span>
+  </div>
+  <div class="mt-5">
+    <mat-chip-list>
+      <mat-chip *ngFor="let tag of meetup.tags">
+        {{tag.tagString}}
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+  <div>
+    <hr/>
+    <p [innerHTML]="meetup.event.description">-- MEETUP EVENT DESCRIPTION --</p>
+
+    <p *ngIf="meetup.gdgMeetup.content !== ''" [innerHTML]="meetup.gdgMeetup.content | safe: 'html'">-- MEETUP ADDITIONAL INFOS</p>
+  </div>
+
+
+
+</div>
+
+

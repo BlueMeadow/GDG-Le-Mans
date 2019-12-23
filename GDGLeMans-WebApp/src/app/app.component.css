@@ -1,0 +1,115 @@
+/*Global app css*/
+
+html {
+  background-color: black;
+}
+
+.navbar-brand, .navbar-brand:active, .navbar-brand:focus{
+  width: inherit !important;
+  padding-top: 0;
+  box-sizing: revert;
+}
+
+.nav-logo {
+  height: 65px;
+  margin-right: 2em;
+}
+
+.brand-logo {
+  font-size: 35px;
+}
+
+.card {
+  background-color: white;
+}
+
+.shadow-underline {
+  height:72px;
+  line-height: 72px;
+  box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+  margin-bottom: 2em;
+  padding: 0;
+  font-family: Roboto, sans-serif;
+}
+
+.navbar-collapse {
+  height:100%;
+}
+
+ul.navbar-nav {
+  height:100%;
+}
+
+li.nav-link > a, a:active, a:focus {
+  outline: none; /* Works in Firefox, Chrome, IE8 and above */
+  color: rgb(103,108,114);
+  text-decoration: none;
+}
+
+.nav-item {
+  padding: 0 1rem;
+}
+
+
+
+li.nav-item > a, a:active, a:focus {
+  outline: none; /* Works in Firefox, Chrome, IE8 and above */
+  color: rgb(103,108,114);
+  text-decoration: none;
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+}
+
+li.nav-item:hover {
+  background-color: rgb(242,242,242);
+}
+
+li.nav-item:hover > a {
+  color: #252525;
+}
+
+.nav-img {
+  padding: 0.4rem 1rem 0;
+
+}
+
+li.nav-img:hover {
+  background-color: rgb(242,242,242);
+}
+
+li.nav-img:hover > a {
+  color: #252525;
+}
+
+li.nav-img > a, a:active, a:focus {
+  outline: none; /* Works in Firefox, Chrome, IE8 and above */
+  color: rgb(103,108,114);
+  text-decoration: none;
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+}
+
+img.img-stats {
+  height: 75px;
+  width: auto;
+}
+
+.media-frame {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+a.unlink {
+  text-decoration: none !important;
+}
+
+
+
+
+
+
+
+
+

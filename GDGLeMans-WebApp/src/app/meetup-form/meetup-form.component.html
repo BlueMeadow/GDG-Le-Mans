@@ -1,0 +1,58 @@
+
+<div class="container" *ngIf="(meetup$ | async) as meetup; else loading">
+
+  <h2 class="mb-4">{{meetup.event.name}}</h2>
+
+  <h4> Description de l'évènement sur Meetup :</h4>
+
+  <div [innerHTML] = meetup.event.description > -- Meetup description placeholder -- </div>
+
+  <h4>Formulaire :</h4>
+
+
+
+<form [formGroup]="meetupForm" (ngSubmit)="onSubmit(meetupForm.value)">
+  <div class="form-container">
+    <mat-form-field>
+      <input matInput formControlName="speakerName" placeholder="Nom du speaker">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-chip-list #chipList aria-label="Tag selection">
+        <mat-chip
+        *ngFor="let tag of tags"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="removeTag(tag)">
+        {{tag}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input matNativeControl
+        #tagInput
+        placeholder="Tags"
+        [formControl]="tagCtrl"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="addOnBlur"
+        (matChipInputTokenEnd)="addTag($event)">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedTag($event)">
+        <mat-option *ngFor="let tag of filteredTagList | async" [value]="tag">
+        {{tag}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <label for="content" class="mt-3">Informations supplémentaires</label>
+    <ckeditor [editor]="Editor" id="content" formControlName="content" class="mb-3"></ckeditor>
+    <button type="submit" [disabled]="!meetupForm.valid" class="btn btn-primary">Submit</button>
+    <button type="button" class="btn btn-danger" (click)="OnDelete()">Delete</button>
+  </div>
+</form>
+
+</div>
+
+<ng-template #loading>
+  <img src="assets/img/google-loader.gif" alt="GDG Le Mans - logo" class="load-spinner">
+</ng-template>

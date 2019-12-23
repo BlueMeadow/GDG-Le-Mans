@@ -1,0 +1,10 @@
+{
+  "realm": "GDG-Le-Mans",
+  "auth-server-url": "http://localhost:8080/auth/",
+  "ssl-required": "external",
+  "resource": "gdg-le-mans",
+  "credentials": {
+    "secret": "e5c789bb-13c1-4b15-8b11-2d2cbaa77eeb"
+  },
+  "confidential-port": 0
+}

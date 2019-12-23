@@ -1,0 +1,62 @@
+<div *ngIf="upcomingMeetups && pastMeetups && tags">
+
+  <mat-tab-group dynamicHeight>
+
+    <mat-tab label="Meetups">
+      <div *ngIf="upcomingMeetups.length !== 0">
+        <h3>Futurs meetups </h3>
+        <div class="row card-group">
+          <div class="col-4 center-block" *ngFor="let uMeetup of upcomingMeetups">
+            <div class="card mx-auto my-3" style="width: 18rem;" >
+              <img *ngIf="uMeetup.event.description_images == null" src="assets/img/gdglemanslogo.png" class="card-img-top" alt="placeholder" />
+              <img *ngIf="uMeetup.event.description_images != null" src="{{uMeetup.event.description_images[0]}}" class="card-img-top" alt="placeholder" />
+              <div class="card-body">
+                <h6 class="card-title">{{uMeetup.event.name}}</h6>
+                <p class="card-subtitle mb-2 text-muted" *ngIf="uMeetup.gdgMeetup.speakerName !== ''">Par {{uMeetup.gdgMeetup.speakerName}}</p>
+                <p class="card-subtitle mb-2 text-muted" *ngIf="uMeetup.gdgMeetup.speakerName === ''">Par le GDG Le Mans</p>
+                <small class="card-text" [innerHTML] = "(uMeetup.event.description.length > 100) ? (uMeetup.event.description | slice:0:100)+'...':(uMeetup.event.description)"></small>
+                <a routerLink="edition/{{uMeetup.gdgMeetup.id}}" routerLinkActive="active" class="btn btn-primary">Éditer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 *ngIf="pastMeetups.length !== 0">Meetups passés</h3>
+        <div class="row card-group">
+          <div class="col-4" *ngFor="let pMeetup of pastMeetups">
+            <div class="card mx-auto my-3" style="width: 18rem;" >
+              <img *ngIf="pMeetup.event.description_images == null" src="assets/img/gdglemanslogo.png" class="card-img-top" alt="placeholder" />
+              <img *ngIf="pMeetup.event.description_images != null" src="{{pMeetup.event.description_images[0]}}" class="card-img-top" alt="image de description de l'event" />
+              <div class="card-body">
+                <h6 class="card-title">{{pMeetup.event.name}}</h6>
+                <p class="card-subtitle mb-2 text-muted" *ngIf="pMeetup.gdgMeetup.speakerName !== ''">Par {{pMeetup.gdgMeetup.speakerName}}</p>
+                <p class="card-subtitle mb-2 text-danger" *ngIf="pMeetup.gdgMeetup.speakerName === ''">Ajouter un speaker</p>
+                <small class="card-text" [innerHTML] = "(pMeetup.event.description.length > 100) ? (pMeetup.event.description | slice:0:100)+'...':(pMeetup.event.description)"></small>
+                <a routerLink="edition/{{pMeetup.gdgMeetup.id}}" routerLinkActive="active" class="btn btn-primary">Éditer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+
+
+    <mat-tab label="Tags">
+    <div class="mt-3">
+      <mat-chip-list class="mt-3">
+            <mat-chip
+              (click)="openDialog(-1, false)">Nouveau tag
+            </mat-chip>
+            <mat-chip *ngFor="let tag of tags; let i = index"
+              (click)="openDialog(i, true)">{{tag.tagString}}
+            </mat-chip>
+      </mat-chip-list>
+    </div>
+    </mat-tab>
+
+  </mat-tab-group>
+
+
+</div>

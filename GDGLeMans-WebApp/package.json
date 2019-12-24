@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --host 0.0.0.0 --port 4200",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -17,7 +17,7 @@
     "@angular/cdk": "^8.2.3",
     "@angular/common": "~8.2.7",
     "@angular/compiler": "~8.2.7",
-    "@angular/core": "~8.2.7",
+    "@angular/core": "^8.2.14",
     "@angular/forms": "~8.2.7",
     "@angular/material": "^8.2.3",
     "@angular/platform-browser": "~8.2.7",
@@ -41,6 +41,7 @@
     "keycloak-angular": "^7.0.1",
     "keycloak-js": "^8.0.0",
     "rxjs": "~6.4.0",
+    "save": "^2.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },

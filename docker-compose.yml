@@ -16,12 +16,10 @@ services:
   gdg-web-app:
     container_name: gdglemans-webapp-container
     build: ./GDGLeMans-WebApp
-    volumes:
-      - '.GDGLeMans-WebApp:/usr/src/app'
+    # volumes:
+    #   - '.GDGLeMans-WebApp:/usr/src/app'
     ports:
       - '4200:4200'
-    command: >
-      bach -c "npm install && ng serve --host 0.0.0.0 --port 4200 -c production"
 
 
   postgres-adc-dev:
@@ -52,7 +50,8 @@ services:
       ASPNETCORE_AUDIENCE: gdglemans
       ASPNETCORE_CONNECTION_STRING: Host=postgres-adc-dev;Port=5432;Username=gdglemans;Password=WiMTMxuvT5ZLg07j;Database=db_gdglemans
     ports:
-      - 8090:8080
+      - 8090:443
+      - 44352:80
     labels:
       - traefik.backend=adc-dev
       - traefik.enable=true

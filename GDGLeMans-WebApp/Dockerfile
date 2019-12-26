@@ -20,4 +20,4 @@ COPY . /app/
 EXPOSE 4200
 
 # Serve the app
-CMD ["npm", "start"]
+CMD ["npm", "start", "--prod"]

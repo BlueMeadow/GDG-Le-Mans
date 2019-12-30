@@ -20,4 +20,5 @@ COPY . /app/
 EXPOSE 4200
 
 # Serve the app
-CMD ["npm", "start", "--prod"]
+CMD npm build:prod
+CMD npm start --prod

@@ -49,8 +49,7 @@ services:
       ASPNETCORE_AUDIENCE: gdglemans
       ASPNETCORE_CONNECTION_STRING: Host=postgres-adc-dev;Port=5432;Username=gdglemans;Password=WiMTMxuvT5ZLg07j;Database=db_gdglemans
     ports:
-      - 8090:443
-      - 44324:80
+      - '44324:8090'
     labels:
       - traefik.backend=adc-dev
       - traefik.enable=true

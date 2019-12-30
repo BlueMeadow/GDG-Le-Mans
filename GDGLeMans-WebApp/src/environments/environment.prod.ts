@@ -4,5 +4,4 @@ export const environment = {
   clientId: "gdg-le-mans",
   scope: 'openid profile email',
   apiRootUrl: "https://gdglemans.apsidetop-devel.net/api"
-
 };

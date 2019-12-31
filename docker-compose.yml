@@ -7,7 +7,7 @@ networks:
     external: false
 
 volumes:
-  adc_postgres_data:
+  gdg_postgres_data:
       driver: local
 
 services:
@@ -15,18 +15,16 @@ services:
   gdg-web-app:
     container_name: gdglemans-webapp-container
     build: ./GDGLeMans-WebApp
-    # volumes:
-    #   - '.GDGLeMans-WebApp:/usr/src/app'
     ports:
       - '4200:4200'
 
 
-  postgres-adc-dev:
+  gdg-postgres:
     container_name: gdglemans-db-container
     image: postgres:10
     restart: always
     volumes:
-        - adc_postgres_data:/var/lib/postgresql/data
+        - gdg_postgres_data:/var/lib/postgresql/data
     networks:
       - internal
     environment:
@@ -47,14 +45,6 @@ services:
     environment:
       ASPNETCORE_AUTHORITY: https://oauth.apsidetop-devel.net/auth/realms/GDG-Le-Mans
       ASPNETCORE_AUDIENCE: gdglemans
-      ASPNETCORE_CONNECTION_STRING: Host=postgres-adc-dev;Port=5432;Username=gdglemans;Password=WiMTMxuvT5ZLg07j;Database=db_gdglemans
+      ASPNETCORE_CONNECTION_STRING: Host=gdg-postgres;Port=5432;Username=gdglemans;Password=WiMTMxuvT5ZLg07j;Database=db_gdglemans
     ports:
       - '44324:8090'
-    labels:
-      - traefik.backend=adc-dev
-      - traefik.enable=true
-      - traefik.docker.network=vps
-      - traefik.frontend.rule=Host:adc-dev.apsidetop-devel.net
-      - traefik.port=8080
-      - traefik.frontend.entryPoints=http,https
-      - traefik.frontend.redirect.entryPoint=https

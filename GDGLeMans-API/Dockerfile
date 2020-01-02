@@ -5,7 +5,7 @@ EXPOSE 44324
 
 ENV ASPNETCORE_AUTHORITY https://oauth.apsidetop-devel.net/auth/realms/GDG-Le-Mans
 ENV ASPNETCORE_AUDIENCE gdg-le-mans
-ENV ASPNETCORE_CONNECTION_STRING Host=gdglemansdb.postgres.database.azure.com;Port=5432;Database=gdglemansdbUsername=gdglemans@gdglemansdb;Password=WiMTMxuvT5ZLg07j;sslmode=Require;
+ENV ASPNETCORE_CONNECTION_STRING Host=gdglemansdb.postgres.database.azure.com;Port=5432;Database=gdglemansdb;Username=gdglemans@gdglemansdb;Password=WiMTMxuvT5ZLg07j;sslmode=Require;
 
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build

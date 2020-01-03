@@ -28,18 +28,19 @@ namespace GDGLeMans.Controllers
 
 
         [HttpGet("populate")]
-        [Authorize]
         public async Task<ActionResult<IEnumerable<GDGMeetup>>> PopulateDb()
         {
             var _meetups = _context.Meetups.OrderByDescending(m => m.Id).ToList();
-            if(_meetups == null)
+            if(!_meetups.Any())
             {
-                var events = (await MeetupApi.Events.Events("GDG-Le-Mans", "upcoming, past", CancellationToken.None)).results;
+                var events = (await MeetupApi.Events.Events("GDG-Le-Mans", "upcoming,past", CancellationToken.None)).results;
 
                 await CheckDbAPIConsistency(events, _meetups);
+                _meetups = _context.Meetups.OrderByDescending(m => m.Id).ToList();
+
             }            
 
-            return NoContent();
+            return _meetups;
         }
 
         [HttpGet("mockdata")]
@@ -75,21 +76,21 @@ namespace GDGLeMans.Controllers
         public async Task<ActionResult<IEnumerable<MeetupDTO>>> GetUpcomingMeetups(string status)
         {
             var _meetups = await _context.Meetups.OrderByDescending(m => m.Id).Include(m => m.MeetupTags).ToListAsync();
+
             List<GDGMeetup> meetups;
             if (status.Equals("upcoming"))
             {
-
                 meetups = _meetups.FindAll(m => m.Upcoming);
-
-            } else if(status.Equals("past"))
+            } 
+            else if(status.Equals("past"))
             {
                 meetups = _meetups.FindAll(m => !m.Upcoming);
-            } else
+            } 
+            else
             {
                 return BadRequest("Error 400: BAD REQUEST\n"+ status + " is not a valid endpoint.");
             }
             
-            //var allTags = _context.Tags.ToList();
             var events = (await MeetupApi.Events.Events("GDG-Le-Mans", status, CancellationToken.None)).results;
 
             await CheckDbAPIConsistency(events, meetups);
@@ -280,7 +281,7 @@ namespace GDGLeMans.Controllers
                                                          Upcoming = !e.Status.Equals("past") ,
                                                          MeetupTags = new List<MeetupTag>()
                     });
-                    await _context.SaveChangesAsync();
+                    
                 }
             }
 
@@ -289,9 +290,10 @@ namespace GDGLeMans.Controllers
                 if (!events.Exists(e => e.Id == m.MeetupId))
                 {
                     _context.Meetups.Remove(m);
-                    await _context.SaveChangesAsync();
+                    
                 }
             }
+            await _context.SaveChangesAsync();
         }
 
        

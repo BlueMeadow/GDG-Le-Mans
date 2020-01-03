@@ -42,9 +42,7 @@ export class MeetupsService {
    * Fetches all the upcoming meetups in the db
    */
   public getUpcomingMeetups() {
-    return this.httpClient.get<Meetup[]>(this.apiUrl + '/status/upcoming', { headers: new HttpHeaders({
-        Authorization: "Bearer " + this.oauthService.getAccessToken()
-      })});
+    return this.httpClient.get<Meetup[]>(this.apiUrl + '/status/upcoming');
   }
 
   /*
@@ -52,9 +50,7 @@ export class MeetupsService {
    * Fetches all the past meetups in the db
    */
   public getPastMeetups() {
-    return this.httpClient.get<Meetup[]>(this.apiUrl + '/status/past', { headers: new HttpHeaders({
-        Authorization: "Bearer " + this.oauthService.getAccessToken()
-      })});
+    return this.httpClient.get<Meetup[]>(this.apiUrl + '/status/past');
   }
 
   /*
@@ -62,9 +58,7 @@ export class MeetupsService {
    * Fetches a single meetup in the db from its id
    */
   public getMeetup(id: number) {
-    return this.httpClient.get<Meetup>(`${this.apiUrl}/${id}`, { headers: new HttpHeaders({
-        Authorization: "Bearer " + this.oauthService.getAccessToken()
-      })});
+    return this.httpClient.get<Meetup>(`${this.apiUrl}/${id}`);
   }
 
   /*

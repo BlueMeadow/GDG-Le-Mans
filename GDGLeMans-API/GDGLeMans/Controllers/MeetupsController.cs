@@ -106,7 +106,7 @@ namespace GDGLeMans.Controllers
 
             if (!_meetups.Any())
             {
-
+                _logger.LogInformation("No meetups");
                 var evs = (await MeetupApi.Events.Events("GDG-Le-Mans", "upcoming,past", CancellationToken.None)).results;
 
                 await CheckDbAPIConsistency(evs, _meetups);
@@ -114,7 +114,7 @@ namespace GDGLeMans.Controllers
                 _meetups = await _context.Meetups.OrderByDescending(m => m.Id).Include(m => m.MeetupTags).ToListAsync();
 
             }
-
+            _logger.LogInformation("Loading meetups");
             List<GDGMeetup> meetups;
             if (status.Equals("upcoming"))
             {
@@ -138,6 +138,7 @@ namespace GDGLeMans.Controllers
             if (events.Any())
                 foreach (Event e in events)
                 {
+                    _logger.LogInformation("Forging DTOs");
                     GDGMeetup m = meetups.Find(m => m.MeetupId.Equals(e.Id));
                     List<GDGTag> tags = new List<GDGTag>();
 

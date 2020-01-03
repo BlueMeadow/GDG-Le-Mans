@@ -1,7 +1,6 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
 WORKDIR /app
-EXPOSE 8090
-EXPOSE 44324
+EXPOSE 80
 
 ENV ASPNETCORE_AUTHORITY https://oauth.apsidetop-devel.net/auth/realms/GDG-Le-Mans
 ENV ASPNETCORE_AUDIENCE gdg-le-mans

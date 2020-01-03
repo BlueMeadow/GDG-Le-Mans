@@ -41,7 +41,7 @@ namespace GDGLeMans
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(o =>
             {
-                o.Authority ="host=gdglemansdb.postgres.database.azure.com port=5432 dbname=gdglemansdb user=gdglemans@gdglemansdb password=WiMTMxuvT5ZLg07j sslmode=require";
+                o.Authority = Environment.GetEnvironmentVariable("ASPNETCORE_AUTHORITY");
                 o.Audience = Environment.GetEnvironmentVariable("ASPNETCORE_AUDIENCE");
                 o.RequireHttpsMetadata = Convert.ToBoolean(Environment.GetEnvironmentVariable("ASPNETCORE_REQUIRE_HTTPS_METADATA"));
 

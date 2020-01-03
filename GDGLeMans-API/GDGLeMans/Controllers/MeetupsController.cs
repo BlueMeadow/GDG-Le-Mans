@@ -28,19 +28,46 @@ namespace GDGLeMans.Controllers
 
 
         [HttpGet("populate")]
-        public async Task<ActionResult<IEnumerable<GDGMeetup>>> PopulateDb()
+        public async Task<ActionResult<IEnumerable<MeetupDTO>>> PopulateDb()
         {
-            var _meetups = _context.Meetups.OrderByDescending(m => m.Id).ToList();
-            if(!_meetups.Any())
+            var meetups = _context.Meetups.OrderByDescending(m => m.Id).ToList();
+
+            if(!meetups.Any())
             {
                 var events = (await MeetupApi.Events.Events("GDG-Le-Mans", "upcoming,past", CancellationToken.None)).results;
 
-                await CheckDbAPIConsistency(events, _meetups);
-                _meetups = _context.Meetups.OrderByDescending(m => m.Id).ToList();
+                await CheckDbAPIConsistency(events, meetups);
 
-            }            
+                List<MeetupDTO> meetupList = new List<MeetupDTO>();
 
-            return _meetups;
+                if (events.Any())
+                    foreach (Event e in events)
+                    {
+                        GDGMeetup m = meetups.Find(m => m.MeetupId.Equals(e.Id));
+                        List<GDGTag> tags = new List<GDGTag>();
+
+                        if (m.MeetupTags != null)
+                        {
+                            foreach (MeetupTag mt in m.MeetupTags)
+                            {
+                                var tag = _context.Tags.ToList().Find(t => t.Id == mt.GDGTagId);
+                                tags.Add(new GDGTag() { Id = tag.Id, TagString = tag.TagString });
+                            }
+                        }
+
+                        meetupList.Add(new MeetupDTO
+                        {
+                            Event = e,
+                            GDGMeetup = m,
+                            Tags = tags
+                        });
+                    }
+
+                return meetupList;
+
+            }
+
+            return NoContent();
         }
 
         [HttpGet("mockdata")]

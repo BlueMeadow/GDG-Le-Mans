@@ -104,6 +104,17 @@ namespace GDGLeMans.Controllers
         {
             var _meetups = await _context.Meetups.OrderByDescending(m => m.Id).Include(m => m.MeetupTags).ToListAsync();
 
+            if (!_meetups.Any())
+            {
+
+                var evs = (await MeetupApi.Events.Events("GDG-Le-Mans", "upcoming,past", CancellationToken.None)).results;
+
+                await CheckDbAPIConsistency(evs, _meetups);
+
+                _meetups = await _context.Meetups.OrderByDescending(m => m.Id).Include(m => m.MeetupTags).ToListAsync();
+
+            }
+
             List<GDGMeetup> meetups;
             if (status.Equals("upcoming"))
             {

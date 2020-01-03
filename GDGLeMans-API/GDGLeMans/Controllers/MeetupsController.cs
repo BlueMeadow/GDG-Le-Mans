@@ -27,6 +27,21 @@ namespace GDGLeMans.Controllers
         }
 
 
+        [HttpGet("populate")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<GDGMeetup>>> PopulateDb()
+        {
+            var _meetups = _context.Meetups.OrderByDescending(m => m.Id).ToList();
+            if(_meetups == null)
+            {
+                var events = (await MeetupApi.Events.Events("GDG-Le-Mans", "upcoming, past", CancellationToken.None)).results;
+
+                await CheckDbAPIConsistency(events, _meetups);
+            }            
+
+            return NoContent();
+        }
+
         [HttpGet("mockdata")]
         [Authorize]
         public async Task<ActionResult<IEnumerable<GDGMeetup>>> PopulateDbWithMockData()
@@ -53,72 +68,6 @@ namespace GDGLeMans.Controllers
             return NoContent();
         }
 
-        // GET: api/Meetups
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<MeetupDTO>>> GetMeetups()
-        //{
-        //    var meetups = await _context.Meetups.OrderBy(m => m.Id).ToListAsync();
-
-        //    var events = (await MeetupApi.Events.Events("GDG-Le-Mans", "past,upcoming",CancellationToken.None)).results;
-
-        //    await CheckDbAPIConsistency(events, meetups);
-
-        //    List<MeetupDTO> meetupList = new List<MeetupDTO>();
-
-        //    if (events.Any())
-        //        foreach (Event e in events)
-        //        {
-        //            meetupList.Add(new MeetupDTO
-        //            {
-        //                Event = e,
-        //                GDGMeetup = meetups.Find(m => m.MeetupId.Equals(e.Id))
-        //            });
-        //        }
-            
-
-        //    return meetupList;
-
-        //}
-
-        // GET: api/Meetups/past
-        //[HttpGet("past")]
-        //public async Task<ActionResult<IEnumerable<MeetupDTO>>> GetPastMeetups()
-        //{
-        //    var _meetups = await _context.Meetups.OrderByDescending(m => m.Id).Include(m => m.MeetupTags).ToListAsync();
-        //    var meetups = _meetups.FindAll(m => !m.Upcoming);
-
-        //    var events = (await MeetupApi.Events.Events("GDG-Le-Mans", "past", CancellationToken.None)).results;
-
-        //    await CheckDbAPIConsistency(events, meetups);
-
-        //    List<MeetupDTO> meetupList = new List<MeetupDTO>();
-
-        //    if (events.Any())
-        //        foreach (Event e in events)
-        //        {
-        //            GDGMeetup m = meetups.Find(m => m.MeetupId.Equals(e.Id));
-        //            List<GDGTag> tags = new List<GDGTag>();
-
-        //            if(m.MeetupTags != null)
-        //            {
-        //                foreach (MeetupTag mt in m.MeetupTags)
-        //                {
-        //                    tags.Add(new GDGTag() { TagString = mt.GDGTag.TagString });
-        //                }
-        //            } 
-
-        //            meetupList.Add(new MeetupDTO
-        //            {
-        //                Event = e,
-        //                GDGMeetup = m,
-        //                Tags = tags
-        //            });
-        //        }
-
-        //    return meetupList;
-
-        //}
-
         private readonly ILogger<MeetupsController> _logger;
 
         // GET: api/Meetups/status/{status}
@@ -129,7 +78,9 @@ namespace GDGLeMans.Controllers
             List<GDGMeetup> meetups;
             if (status.Equals("upcoming"))
             {
+
                 meetups = _meetups.FindAll(m => m.Upcoming);
+
             } else if(status.Equals("past"))
             {
                 meetups = _meetups.FindAll(m => !m.Upcoming);

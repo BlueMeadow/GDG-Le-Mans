@@ -63,6 +63,8 @@ export class AdministrationComponent implements OnInit {
 
   }
 
-
-
+  populateDatabase() {
+    this.meetupsService.populateMeetups();
+    window.location.reload();
+  }
 }

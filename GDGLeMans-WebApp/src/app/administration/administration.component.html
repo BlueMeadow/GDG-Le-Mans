@@ -3,6 +3,10 @@
   <mat-tab-group dynamicHeight>
 
     <mat-tab label="Meetups">
+      <div *ngIf="upcomingMeetups.length == 0 && pastMeetups.length == 0">
+        <button class="btn btn-primary" (click)="populateDatabase()">Remplir la base de données</button>
+      </div>
+
       <div *ngIf="upcomingMeetups.length !== 0">
         <h3>Futurs meetups </h3>
         <div class="row card-group">

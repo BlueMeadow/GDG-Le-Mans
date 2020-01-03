@@ -31,10 +31,12 @@ export class MeetupsService {
 
   /*
    * GET
-   * Fetches all the meetups in the db
+   * Calls the API to populate the database with events fetched from the meetup API
    */
-  public getMeetups() {
-    return this.httpClient.get<Meetup[]>(this.apiUrl);
+  public populateMeetups() {
+    return this.httpClient.get<Meetup[]>(this.apiUrl + '/populate', { headers: new HttpHeaders({
+        Authorization: "Bearer " + this.oauthService.getAccessToken()
+      })});
   }
 
   /*

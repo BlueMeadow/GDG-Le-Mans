@@ -98,38 +98,17 @@ namespace GDGLeMans.Controllers
 
         private readonly ILogger<MeetupsController> _logger;
 
-        // GET: api/Meetups/status/{status}
-        [HttpGet("status/{status}")]
-        public async Task<ActionResult<IEnumerable<MeetupDTO>>> GetUpcomingMeetups(string status)
+        // GET: api/Meetups/past
+        [HttpGet("past")]
+        public async Task<ActionResult<IEnumerable<MeetupDTO>>> GetPastMeetups()
         {
             var _meetups = await _context.Meetups.OrderByDescending(m => m.Id).Include(m => m.MeetupTags).ToListAsync();
 
-            if (!_meetups.Any())
-            {
-                _logger.LogInformation("No meetups");
-                var evs = (await MeetupApi.Events.Events("GDG-Le-Mans", "upcoming,past", CancellationToken.None)).results;
-
-                await CheckDbAPIConsistency(evs, _meetups);
-
-                _meetups = await _context.Meetups.OrderByDescending(m => m.Id).Include(m => m.MeetupTags).ToListAsync();
-
-            }
-            _logger.LogInformation("Loading meetups");
             List<GDGMeetup> meetups;
-            if (status.Equals("upcoming"))
-            {
-                meetups = _meetups.FindAll(m => m.Upcoming);
-            } 
-            else if(status.Equals("past"))
-            {
-                meetups = _meetups.FindAll(m => !m.Upcoming);
-            } 
-            else
-            {
-                return BadRequest("Error 400: BAD REQUEST\n"+ status + " is not a valid endpoint.");
-            }
+
+            meetups = _meetups.FindAll(m => !m.Upcoming);           
             
-            var events = (await MeetupApi.Events.Events("GDG-Le-Mans", status, CancellationToken.None)).results;
+            var events = (await MeetupApi.Events.Events("GDG-Le-Mans", "past", CancellationToken.None)).results;
 
             await CheckDbAPIConsistency(events, meetups);
 
@@ -138,7 +117,49 @@ namespace GDGLeMans.Controllers
             if (events.Any())
                 foreach (Event e in events)
                 {
-                    _logger.LogInformation("Forging DTOs");
+                    GDGMeetup m = meetups.Find(m => m.MeetupId.Equals(e.Id));
+                    List<GDGTag> tags = new List<GDGTag>();
+
+                    if (m.MeetupTags != null)
+                    {
+                        foreach (MeetupTag mt in m.MeetupTags)
+                        {
+                            var tag = _context.Tags.ToList().Find(t => t.Id == mt.GDGTagId);
+                            tags.Add(new GDGTag() { Id = tag.Id, TagString = tag.TagString });
+                        }
+                    }
+
+                    meetupList.Add(new MeetupDTO
+                    {
+                        Event = e,
+                        GDGMeetup = m,
+                        Tags = tags
+                    });
+                }
+
+            return meetupList;
+
+        }
+
+        // GET: api/Meetups/upcoming
+        [HttpGet("upcoming")]
+        public async Task<ActionResult<IEnumerable<MeetupDTO>>> GetUpcomingMeetups()
+        {
+            var _meetups = await _context.Meetups.OrderByDescending(m => m.Id).Include(m => m.MeetupTags).ToListAsync();
+
+            List<GDGMeetup> meetups;
+           
+            meetups = _meetups.FindAll(m => m.Upcoming);
+
+            var events = (await MeetupApi.Events.Events("GDG-Le-Mans", "upcoming", CancellationToken.None)).results;
+
+            await CheckDbAPIConsistency(events, meetups);
+
+            List<MeetupDTO> meetupList = new List<MeetupDTO>();
+
+            if (events.Any())
+                foreach (Event e in events)
+                {
                     GDGMeetup m = meetups.Find(m => m.MeetupId.Equals(e.Id));
                     List<GDGTag> tags = new List<GDGTag>();
 

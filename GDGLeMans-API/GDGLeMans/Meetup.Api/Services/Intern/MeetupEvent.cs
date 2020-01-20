@@ -101,7 +101,7 @@ namespace Meetup.Api
 #if DEBUG
             queryUrl.Append($"/2/events?{SecretKeys.ApiKeyUrl}&group_urlname={groupUrl}&fields=description_images");
 #else
-            queryUrl.Append($"/2/events?&group_urlname={groupUrl}");
+            queryUrl.Append($"/2/events?&group_urlname={groupUrl}&fields=description_images");
 #endif
             var response =
                 await MeetupBase.ExecuteQueryAsync<Events>(queryUrl, cancellationToken);
@@ -132,7 +132,7 @@ namespace Meetup.Api
 #if DEBUG
             queryUrl.Append($"/2/events?{SecretKeys.ApiKeyUrl}&group_urlname={groupUrl}&status={statusList}&fields=description_images");
 #else
-            queryUrl.Append($"/2/events?&group_urlname={groupUrl}");
+            queryUrl.Append($"/2/events?&group_urlname={groupUrl}&status={statusList}&fields=description_images");
 #endif
             var response =
                 await MeetupBase.ExecuteQueryAsync<Events>(queryUrl, cancellationToken);

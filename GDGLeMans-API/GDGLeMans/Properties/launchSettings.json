@@ -32,11 +32,11 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/Meetups/status/past",
       "environmentVariables": {
         "ASPNETCORE_URLS": "https://+:443",
-        "ASPNETCORE_HTTPS_PORT": "44325"
+        "ASPNETCORE_HTTPS_PORT": "44324"
       },
       "httpPort": 58423,
       "useSSL": true,
-      "sslPort": 44325
+      "sslPort": 44324
     }
   }
 }

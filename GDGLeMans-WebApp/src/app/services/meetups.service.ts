@@ -44,7 +44,7 @@ export class MeetupsService {
    * Fetches all the upcoming meetups in the db
    */
   public getUpcomingMeetups() {
-    return this.httpClient.get<Meetup[]>(this.apiUrl + '/status/upcoming');
+    return this.httpClient.get<Meetup[]>(this.apiUrl + '/upcoming');
   }
 
   /*
@@ -52,7 +52,7 @@ export class MeetupsService {
    * Fetches all the past meetups in the db
    */
   public getPastMeetups() {
-    return this.httpClient.get<Meetup[]>(this.apiUrl + '/status/past');
+    return this.httpClient.get<Meetup[]>(this.apiUrl + '/past');
   }
 
   /*

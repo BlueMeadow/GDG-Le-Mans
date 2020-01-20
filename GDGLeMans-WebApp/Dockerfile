@@ -1,5 +1,6 @@
 FROM node:12.2.0 AS builder
 WORKDIR /app
+EXPOSE 4200
 COPY . .
 RUN npm install -g @angular/cli
 RUN npm install

@@ -16,8 +16,7 @@ services:
     container_name: gdglemans-webapp-container
     build: ./GDGLeMans-WebApp
     ports:
-      - '4200:4200'
-
+      - '4200:80'
 
   gdg-postgres:
     container_name: gdglemans-db-container
@@ -25,8 +24,6 @@ services:
     restart: always
     volumes:
         - gdg_postgres_data:/var/lib/postgresql/data
-    networks:
-      - internal
     environment:
       POSTGRES_ROOT_PASSWORD: Uf#9HFn%<E]n.^Da
       POSTGRES_DB: db_gdglemans
@@ -37,14 +34,11 @@ services:
     container_name: gdglemans-api-container
     build: ./GDGLeMans-API
     depends_on:
-      - postgres-adc-dev
+      - gdg-postgres
     restart: always
-    networks:
-      - vps
-      - internal
     environment:
       ASPNETCORE_AUTHORITY: https://oauth.apsidetop-devel.net/auth/realms/GDG-Le-Mans
       ASPNETCORE_AUDIENCE: gdglemans
       ASPNETCORE_CONNECTION_STRING: Host=gdg-postgres;Port=5432;Username=gdglemans;Password=WiMTMxuvT5ZLg07j;Database=db_gdglemans
     ports:
-      - '44324:8090'
+      - '80:80'

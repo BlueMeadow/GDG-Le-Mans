@@ -1,4 +1,4 @@
-import {Component, ModuleWithProviders} from '@angular/core';
+import {ModuleWithProviders} from '@angular/core';
 import {AdministrationComponent} from './administration/administration.component';
 import {RouterModule, Routes} from '@angular/router';
 import {MeetupFormComponent} from './meetup-form/meetup-form.component';

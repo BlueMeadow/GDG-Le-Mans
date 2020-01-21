@@ -1,8 +1,5 @@
-import { Injectable } from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {Stats} from '../models/stats';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Meetup} from '../models/meetup';
 import {Tag} from '../models/tag';
 import {OAuthService} from 'angular-oauth2-oidc';
 import {environment} from '../../environments/environment';

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
 
-import { Meetup } from '../models/meetup';
-import { MeetupsService } from '../services/meetups.service';
+import {Meetup} from '../models/meetup';
+import {MeetupsService} from '../services/meetups.service';
 
 @Component({
   selector: 'app-meetup-details',

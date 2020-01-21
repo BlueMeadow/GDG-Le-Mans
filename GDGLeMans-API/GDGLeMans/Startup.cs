@@ -104,7 +104,7 @@ namespace GDGLeMans
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<GDGContext>();
-                context.Database.EnsureDeleted();
+                //context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
             }
 

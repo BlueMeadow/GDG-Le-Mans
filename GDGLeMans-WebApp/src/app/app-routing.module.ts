@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {MeetupFormComponent} from './meetup-form/meetup-form.component';
 import {MeetupsComponent} from './meetups/meetups.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';

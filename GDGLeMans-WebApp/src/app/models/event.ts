@@ -1,6 +1,7 @@
-import {Time} from '@angular/common';
+/* tslint:disable:variable-name */
 import {Venue} from './venue';
 import {Group} from './group';
+import {PhotoAlbum} from "./photoAlbum";
 
 export class Event {
 
@@ -24,6 +25,7 @@ how_to_find_us: string;
 name: string;
 headcount: number;
 group: Group;
+photo_album: PhotoAlbum;
 
 
 }

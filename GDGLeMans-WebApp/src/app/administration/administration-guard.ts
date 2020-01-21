@@ -1,6 +1,6 @@
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, ActivatedRoute} from '@angular/router';
-import { OAuthService } from 'angular-oauth2-oidc';
-import { Injectable } from '@angular/core';
+import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular/router';
+import {OAuthService} from 'angular-oauth2-oidc';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class AdministrationGuard implements CanActivate {

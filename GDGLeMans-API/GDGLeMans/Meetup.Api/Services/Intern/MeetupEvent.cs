@@ -162,10 +162,9 @@ namespace Meetup.Api
             if (string.IsNullOrWhiteSpace(id)) throw new ArgumentException("Argument is null or whitespace", nameof(id));
 
             var queryUrl = new StringBuilder(MeetupBase.BASE_URL);
-            queryUrl.Append($"/{urlName}/events/{id}/");
+            queryUrl.Append($"/{urlName}/events/{id}?&photo-host=public&fields=photo_album");
 
-            var response =
-                await MeetupBase.ExecuteQueryAsync<Event>(queryUrl, cancellationToken);
+            var response = await MeetupBase.ExecuteQueryAsync<Event>(queryUrl, cancellationToken);
 
             if (response == null)
                 throw new HttpRequestException(Resources.ErrorMessage);

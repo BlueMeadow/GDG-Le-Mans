@@ -1,19 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-dark indigo navbar-fixed-top shadow-underline">
   <a routerLink="/" class="navbar-brand"><img src="assets/img/gdglemanslogo.png" alt="GDG Le Mans - logo" class="nav-logo"></a>
-<!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--    <span class="navbar-toggle-icon"></span>-->
-<!--  </button>-->
-  <div class="collapse navbar-collapse" id="navbarContent">
-    <ul class="navbar-nav mr-auto">
+  <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed">
+    &#9776;
+  </button>
+  <div [ngbCollapse]="isCollapsed" class="collapse navbar-collapse" id="navbarContent">
+    <ul class="navbar-nav w-100">
       <li class="nav-item">
-        <a routerLink="/meetups" routerLinkActive="active" class="font-weight-bold">Événements</a>
+        <a routerLink="/meetups" routerLinkActive="active" class="font-weight-bold" (click)="isCollapsed = true">Événements</a>
       </li>
-      <li class="nav-item">
-        <a routerLink="/administration" routerLinkActive="active" class="font-weight-bold">Administration</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav mr-1">
-      <li class="nav-img">
+      <li class="nav-img ml-lg-auto">
         <a href="https://twitter.com/gdglemans"><i class="fab fa-twitter brand-logo"></i></a>
       </li>
       <li class="nav-img">
@@ -23,7 +18,8 @@
   </div>
 </nav>
 
-<div class="container">
+
+<div class="container mb-3">
   <router-outlet></router-outlet>
 </div>
 

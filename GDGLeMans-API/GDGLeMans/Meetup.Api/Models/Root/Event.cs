@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Meetup.Api.Models.Root;
+using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Text;
 
@@ -66,6 +67,9 @@ namespace Meetup.Api
 
         [JsonProperty("description_images")]
         public string DescriptionImages;
+
+        [JsonProperty("photo_album")]
+        public PhotoAlbum PhotoAlbum;
 
   
 

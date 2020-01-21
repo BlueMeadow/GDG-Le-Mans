@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Meetup} from '../models/meetup';
 import {MeetupsService} from '../services/meetups.service';
 import {Tag} from '../models/tag';
 import {TagsService} from '../services/tags.service';
-import {MatChipInputEvent, MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {TagDialogComponent} from '../tag-dialog/tag-dialog.component';
-import {OAuthService} from 'angular-oauth2-oidc';
 
 
 export interface DialogData {

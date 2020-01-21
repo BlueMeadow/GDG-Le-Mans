@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {AuthConfig, JwksValidationHandler, OAuthEvent, OAuthService} from 'angular-oauth2-oidc';
+import {Component} from '@angular/core';
+import {AuthConfig, JwksValidationHandler, OAuthService} from 'angular-oauth2-oidc';
 import {environment} from '../environments/environment';
 
 
@@ -26,6 +26,7 @@ export const authConfig: AuthConfig = {
 })
 export class AppComponent {
   title = 'GDG - Le Mans';
+  isCollapsed=true;
 
   constructor(private oauthService: OAuthService) {
     this.configure();

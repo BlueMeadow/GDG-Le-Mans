@@ -5,7 +5,7 @@ import {Location} from '@angular/common';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Meetup} from '../models/meetup';
 import {Observable} from 'rxjs';
-import {startWith, tap, map} from 'rxjs/operators';
+import {map, startWith, tap} from 'rxjs/operators';
 import {GDGMeetup} from '../models/gdg-meetup';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Tag} from '../models/tag';

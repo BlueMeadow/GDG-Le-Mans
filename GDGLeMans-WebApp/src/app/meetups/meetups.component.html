@@ -1,7 +1,7 @@
 <div *ngIf="upcomingMeetups && pastMeetups">
 
   <h3>Nos prochaines conférences </h3>
-  <p *ngIf="upcomingMeetups == null || upcomingMeetups.length === 0">Pas d'évènements en approche pour le moment, revenez plus tard ;)</p>
+  <p *ngIf="upcomingMeetups == null || upcomingMeetups.length === 0" class="my-4 ml-4">Pas d'évènements en approche pour le moment, revenez plus tard ;)</p>
   <div class="row card-group">
     <div class="col-4" *ngFor="let uMeetup of upcomingMeetups">
       <a routerLink="/meetups/{{uMeetup.gdgMeetup.id}}" routerLinkActive="active" class="unlink">
@@ -28,7 +28,7 @@
 
   <h3>Nos anciens évènements</h3>
   <div class="row card-group">
-    <div class="col-4" *ngFor="let pMeetup of pastMeetups">
+    <div class="col-4" *ngFor="let pMeetup of pastMeetups.reverse()">
       <a routerLink="/meetups/{{pMeetup.gdgMeetup.id}}" routerLinkActive="active" class="unlink">
         <div class="card card-link my-3" style="width: 18rem;" >
           <img *ngIf="pMeetup.event.description_images == null" src="assets/img/gdglemanslogo.png" class="card-img-top" alt="placeholder" />

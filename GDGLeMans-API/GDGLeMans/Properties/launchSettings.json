@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/Meetups/status/past",
+      "launchUrl": "api/Meetups/past",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -29,7 +29,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": false,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/Meetups/status/past",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/Meetups/past",
       "environmentVariables": {
         "ASPNETCORE_URLS": "https://+:443",
         "ASPNETCORE_HTTPS_PORT": "44324"

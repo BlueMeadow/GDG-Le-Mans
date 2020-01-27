@@ -29,7 +29,7 @@
       <div>
         <h3 *ngIf="pastMeetups.length !== 0">Meetups passés</h3>
         <div class="row card-group">
-          <div class="col-4" *ngFor="let pMeetup of pastMeetups">
+          <div class="col-4" *ngFor="let pMeetup of pastMeetups.reverse()">
             <div class="card mx-auto my-3" style="width: 18rem;" >
               <img *ngIf="pMeetup.event.description_images == null" src="assets/img/gdglemanslogo.png" class="card-img-top" alt="placeholder" />
               <img *ngIf="pMeetup.event.description_images != null" src="{{pMeetup.event.description_images[0]}}" class="card-img-top" alt="image de description de l'event" />

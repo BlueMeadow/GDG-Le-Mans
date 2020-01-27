@@ -12,7 +12,6 @@ import {Tag} from '../models/tag';
 import {MatAutocomplete, MatAutocompleteSelectedEvent, MatChipInputEvent} from '@angular/material';
 import {TagsService} from '../services/tags.service';
 
-
 import * as ClassicEditor from '../ckeditor5-build-classic';
 
 @Component({
@@ -56,10 +55,6 @@ export class MeetupFormComponent implements OnInit {
     console.log('MeetupForm Initialised');
 
     this.id = +this.route.snapshot.paramMap.get('id');
-    //
-    // this.Editor = ClassicEditor.create( document.querySelector( '#editor'), editorConfig)
-    //                            .then(editor => {  console.log('Editor initialized', editor); })
-    //                            .catch(error => { console.error( error.stack); });
 
     // FORM
     this.meetupForm = this.formBuilder.group({
